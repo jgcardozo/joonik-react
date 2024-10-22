@@ -24,7 +24,7 @@ const LocationList: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [orderBy, setOrderBy] = useState<keyof Location>('code');  // Columna por la cual ordenar
+    const [orderBy, setOrderBy] = useState<keyof Location>('code');
     const [orderDirection, setOrderDirection] = useState<'asc' | 'desc'>('asc');
     const [apiMessage, setApiMessage] = useState<string | null>(null);
 
