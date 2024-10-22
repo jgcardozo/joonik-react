@@ -22,19 +22,22 @@ interface Location {
 const LocationList: React.FC = () => {
     const [locations, setLocations] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [orderBy, setOrderBy] = useState<keyof Location>('code');  // Columna por la cual ordenar
     const [orderDirection, setOrderDirection] = useState<'asc' | 'desc'>('asc');
+    const [apiMessage, setApiMessage] = useState<string | null>(null);
 
     const loadData = async () => {
         try {
             const data = await fetchLocations();
             setLocations(data);
-        } catch (err) {
-            console.error(err);
-            setError('Error listing Locations.');
+        }catch (err: any) {
+            if (err.response) {
+                setApiMessage(err.response.data.message);
+            } else {
+                setApiMessage('Error desconocido'); 
+            }
         } finally {
             setLoading(false);
         }
@@ -79,7 +82,7 @@ const LocationList: React.FC = () => {
     };
 
     if (loading) return <CircularProgress />;
-    if (error) return <Typography color="error">{error}</Typography>;
+    if (apiMessage) return <Typography color="error">{apiMessage}</Typography>;
 
     return (
         <>
