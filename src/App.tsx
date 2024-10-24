@@ -6,7 +6,7 @@ const App: React.FC = () => {
     return (
         <Container>
             <Typography variant="h4" gutterBottom>
-                Lista de Localizaciones
+                Lista de Sedes Joonik
             </Typography>
             <LocationList />
         </Container>
